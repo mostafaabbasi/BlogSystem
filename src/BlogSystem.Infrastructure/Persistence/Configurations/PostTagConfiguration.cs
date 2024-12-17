@@ -11,5 +11,13 @@ internal sealed class PostTagConfiguration : IEntityTypeConfiguration<PostTag>
         builder.ToTable("PostTags");
 
         builder.HasKey(postTag => new { postTag.PostId, postTag.TagId });
+
+        builder.HasOne(h => h.Post)
+        .WithMany(w => w.PostTags)
+        .HasForeignKey(h => h.PostId);
+
+        builder.HasOne(h => h.Tag)
+        .WithMany(w => w.PostTags)
+        .HasForeignKey(h => h.TagId);
     }
 }

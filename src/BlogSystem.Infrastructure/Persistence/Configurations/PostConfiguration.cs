@@ -1,3 +1,4 @@
+using BlogSystem.Domain.Abstractions;
 using BlogSystem.Domain.Posts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -37,6 +38,11 @@ internal sealed class PostConfiguration : IEntityTypeConfiguration<Post>
             .UsingEntity<PostTag>();
 
         builder.Navigation(x => x.Tags)
-            .Metadata.SetField("_tags");
+            .Metadata.SetField(FiledSchema.TagsField);
+
+            builder.HasMany(h=>h.PostTags);
+
+            builder.Navigation(x => x.PostTags)
+            .Metadata.SetField(FiledSchema.PostTagsField);
     }
 }
