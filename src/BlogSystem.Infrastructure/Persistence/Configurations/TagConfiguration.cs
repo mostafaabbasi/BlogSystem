@@ -1,3 +1,4 @@
+using BlogSystem.Domain.Abstractions;
 using BlogSystem.Domain.Tags;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -21,6 +22,11 @@ public class TagConfiguration : IEntityTypeConfiguration<Tag>
         builder.HasMany(h => h.Posts);
 
         builder.Navigation(x => x.Posts)
-            .Metadata.SetField("_posts");
+            .Metadata.SetField(FiledSchema.PostsField);
+
+        builder.HasMany(h => h.PostTags);
+
+        builder.Navigation(x => x.PostTags)
+        .Metadata.SetField(FiledSchema.PostTagsField);
     }
 }
