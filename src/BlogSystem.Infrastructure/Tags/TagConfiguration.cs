@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BlogSystem.Infrastructure.Tags;
 
-public class TagConfiguration : IEntityTypeConfiguration<Tag>
+internal sealed class TagConfiguration : IEntityTypeConfiguration<Tag>
 {
     public void Configure(EntityTypeBuilder<Tag> builder)
     {
