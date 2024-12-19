@@ -67,6 +67,12 @@ namespace BlogSystem.Infrastructure.Migrations
                 name: "IX_PostTags_TagId",
                 table: "PostTags",
                 column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tags_Name",
+                table: "Tags",
+                column: "Name",
+                unique: true);
         }
 
         /// <inheritdoc />
