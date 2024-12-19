@@ -11,4 +11,6 @@ public sealed record Summary
     }
 
     public string Value { get; }
+
+    public static implicit operator Summary(string value) => new Summary(value);
 }

@@ -11,4 +11,6 @@ public sealed record Author
     }
 
     public string Value { get; }
+
+    public static implicit operator Author(string value) => new Author(value);
 }
