@@ -1,11 +1,10 @@
-using BlogSystem.Domain.Abstractions;
 using BlogSystem.Domain.Posts;
 using BlogSystem.Domain.Tags;
 using Microsoft.EntityFrameworkCore;
 
-namespace BlogSystem.Infrastructure.Persistence;
+namespace BlogSystem.Infrastructure;
 
-public sealed class BlogDbContext(DbContextOptions options) : DbContext(options), IUnitOfWork
+public sealed class BlogDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<Post> Posts => Set<Post>();
     public DbSet<Tag> Tags => Set<Tag>();

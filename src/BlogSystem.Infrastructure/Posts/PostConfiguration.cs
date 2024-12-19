@@ -1,9 +1,8 @@
-using BlogSystem.Domain.Abstractions;
 using BlogSystem.Domain.Posts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BlogSystem.Infrastructure.Persistence.Configurations;
+namespace BlogSystem.Infrastructure.Posts;
 
 internal sealed class PostConfiguration : IEntityTypeConfiguration<Post>
 {
@@ -45,11 +44,8 @@ internal sealed class PostConfiguration : IEntityTypeConfiguration<Post>
                       .IsRequired();
         });
 
-        builder.HasMany(p => p.Tags)
-            .WithMany(t => t.Posts)
-            .UsingEntity<PostTag>();
-
-        builder.Navigation(x => x.Tags)
-        .Metadata.SetField(FiledSchema.TagsField);
+        builder.HasMany(h=>h.PostTags)
+        .WithOne(w=>w.Post)
+        .HasForeignKey(w=>w.PostId);
     }
 }

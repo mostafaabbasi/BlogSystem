@@ -1,8 +1,7 @@
 using BlogSystem.Domain.Tags;
-using BlogSystem.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace BlogSystem.Infrastructure.Repositories;
+namespace BlogSystem.Infrastructure.Tags;
 
 internal sealed class TagRepository(BlogDbContext dbContext) : ITagRepository
 {
