@@ -11,4 +11,6 @@ public sealed record Content
     }
 
     public string Value { get; }
+
+    public static implicit operator Content(string value) => new Content(value);
 }

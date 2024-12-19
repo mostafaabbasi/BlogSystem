@@ -13,20 +13,18 @@ public class TagConfiguration : IEntityTypeConfiguration<Tag>
 
         builder.HasKey(t => t.Id);
 
-        builder.Property(t => t.Name)
-        .HasConversion(name => name.Value, value => new Name(value))
-        .HasMaxLength(50)
-        .IsRequired()
-        .IsUnicode();
+        builder.OwnsOne(x => x.Name, nameBuilder =>
+        {
+            nameBuilder.Property(x => x.Value)
+                      .HasColumnName("Name")
+                      .HasMaxLength(50)
+                      .IsRequired();
+        });
 
-        builder.HasMany(h => h.Posts);
+        builder.HasMany(h => h.Posts)
+            .WithMany(w => w.Tags);
 
         builder.Navigation(x => x.Posts)
             .Metadata.SetField(FiledSchema.PostsField);
-
-        builder.HasMany(h => h.PostTags);
-
-        builder.Navigation(x => x.PostTags)
-        .Metadata.SetField(FiledSchema.PostTagsField);
     }
 }

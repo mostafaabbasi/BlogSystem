@@ -11,4 +11,6 @@ public sealed record Title
     }
 
     public string Value { get; }
+
+    public static implicit operator Title(string value) => new Title(value);
 }
