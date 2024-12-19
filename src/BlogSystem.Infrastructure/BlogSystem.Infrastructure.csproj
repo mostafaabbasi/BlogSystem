@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlogSystem.Domain\BlogSystem.Domain.csproj" />
+    <ProjectReference Include="..\BlogSystem.Application\BlogSystem.Application.csproj" />
   </ItemGroup>
 
 </Project>
