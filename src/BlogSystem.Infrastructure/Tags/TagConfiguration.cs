@@ -1,9 +1,9 @@
-using BlogSystem.Domain.Abstractions;
+using BlogSystem.Domain.Posts;
 using BlogSystem.Domain.Tags;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BlogSystem.Infrastructure.Persistence.Configurations;
+namespace BlogSystem.Infrastructure.Tags;
 
 public class TagConfiguration : IEntityTypeConfiguration<Tag>
 {
@@ -19,12 +19,12 @@ public class TagConfiguration : IEntityTypeConfiguration<Tag>
                       .HasColumnName("Name")
                       .HasMaxLength(50)
                       .IsRequired();
+
+            nameBuilder.HasIndex(h => h.Value).IsUnique();
         });
 
-        builder.HasMany(h => h.Posts)
-            .WithMany(w => w.Tags);
-
-        builder.Navigation(x => x.Posts)
-            .Metadata.SetField(FiledSchema.PostsField);
+        builder.HasMany<PostTag>()
+        .WithOne()
+        .HasForeignKey(x => x.TagId);
     }
 }
