@@ -23,13 +23,14 @@ internal sealed class UpdatePostHandler(
         CheckPostIsExist(existingPost);
 
         var tags = await tagRepository.SetTagsAsync(command.TagNames, cancellationToken);
+        var tagIds = tags.Select(s=>s.Id).ToList();
 
         existingPost!.Update(
             command.Title,
             command.Content,
             command.Summary,
             command.Author,
-            tags);
+            tagIds);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }

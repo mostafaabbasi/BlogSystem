@@ -13,13 +13,14 @@ internal sealed class CreatePostHandler(
     public async ValueTask<Guid> Handle(CreatePostCommand command, CancellationToken cancellationToken)
     {
         var tags = await tagRepository.SetTagsAsync(command.TagNames, cancellationToken);
+        var tagIds = tags.Select(s=>s.Id).ToList();
 
         var post = Post.Create(
         command.Title,
         command.Content,
         command.Summary,
         command.Author,
-        tags);
+        tagIds);
 
         await postRepository.AddAsync(post, cancellationToken);
 

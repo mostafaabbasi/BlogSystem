@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace BlogSystem.Infrastructure.Persistence;
+namespace BlogSystem.Infrastructure;
 
 public class BlogDbContextFactory : IDesignTimeDbContextFactory<BlogDbContext>
 {

@@ -2,7 +2,7 @@ using System.Data;
 using BlogSystem.Application.Data;
 using Microsoft.Data.SqlClient;
 
-namespace BlogSystem.Infrastructure.Persistence;
+namespace BlogSystem.Infrastructure;
 
 internal sealed class SqlConnectionFactory(string connectionString) : ISqlConnectionFactory
 {

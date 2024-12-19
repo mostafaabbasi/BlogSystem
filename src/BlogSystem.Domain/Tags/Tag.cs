@@ -22,10 +22,6 @@ public sealed class Tag : Entity
         return new Tag(Guid.NewGuid(), name);
     }
     
-    private readonly List<Post> _posts = new();
-    
     public Guid Id { get; private set; }
-    public Name Name { get; private set; }
-    
-    public IReadOnlyCollection<Post> Posts => _posts.AsReadOnly();
+    public Name Name { get; private set; }    
 }
