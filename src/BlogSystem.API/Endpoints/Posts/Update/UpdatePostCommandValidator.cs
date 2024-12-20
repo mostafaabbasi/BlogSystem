@@ -1,10 +1,10 @@
 using FluentValidation;
 
-namespace BlogSystem.Application.Posts.UpdatePost;
+namespace BlogSystem.API.Endpoints.Posts.Update;
 
-internal sealed class UpdatePostCommandValidator : AbstractValidator<UpdatePostCommand>
+internal sealed class UpdatePostRequestValidator : AbstractValidator<UpdatePostRequest>
 {
-    public UpdatePostCommandValidator()
+    public UpdatePostRequestValidator()
     {
         RuleFor(f => f.Title)
         .NotEmpty()

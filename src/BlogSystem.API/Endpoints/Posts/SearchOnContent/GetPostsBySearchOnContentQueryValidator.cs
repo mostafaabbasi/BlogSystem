@@ -1,10 +1,10 @@
 using FluentValidation;
 
-namespace BlogSystem.Application.Posts.GetPostsBySearchOnContent;
+namespace BlogSystem.API.Endpoints.Posts.SearchOnContent;
 
-internal sealed class GetPostsBySearchOnContentQueryValidator : AbstractValidator<GetPostsBySearchOnContentQuery>
+internal sealed class GetPostsBySearchOnContentRequestValidator : AbstractValidator<GetPostsBySearchOnContentRequest>
 {
-    public GetPostsBySearchOnContentQueryValidator()
+    public GetPostsBySearchOnContentRequestValidator()
     {
         RuleFor(f => f.SearchTerm)
         .NotEmpty()
