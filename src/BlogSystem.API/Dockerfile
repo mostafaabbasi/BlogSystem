@@ -14,7 +14,7 @@ COPY ["src/BlogSystem.Application/BlogSystem.Application.csproj", "src/BlogSyste
 RUN dotnet restore "src/BlogSystem.API/BlogSystem.API.csproj"
 
 COPY . .
-RUN dotnet publish "src/BlogSystem.API/BlogSystem.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "src/BlogSystem.API/BlogSystem.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false --no-restore
 
 FROM base AS final
 WORKDIR /app
