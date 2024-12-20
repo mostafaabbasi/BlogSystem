@@ -1,6 +1,8 @@
 using BlogSystem.API;
+using BlogSystem.API.Extensions;
 using BlogSystem.Application;
 using BlogSystem.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,8 @@ app.UseCors("AllowOrigin");
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.ApplyMigrations();
 
 app.MapEndpoints();
 
