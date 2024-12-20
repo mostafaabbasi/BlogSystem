@@ -1,6 +1,6 @@
 using BlogSystem.API.Abstractions;
 using BlogSystem.Application.Tags.GetTags;
-using Mediator;
+using MediatR;
 
 namespace BlogSystem.API.Endpoints.Tags.GetAll;
 

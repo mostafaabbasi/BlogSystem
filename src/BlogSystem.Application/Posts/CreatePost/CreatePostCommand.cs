@@ -1,4 +1,4 @@
-using Mediator;
+using MediatR;
 
 namespace BlogSystem.Application.Posts.CreatePost;
 
@@ -7,4 +7,4 @@ public sealed record CreatePostCommand(
     string Content,
     string Summary,
     string Author,
-    List<string> TagNames) : ICommand<Guid>;
+    List<string> TagNames) : IRequest<Guid>;

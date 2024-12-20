@@ -2,21 +2,16 @@ using BlogSystem.Domain.Abstractions;
 using BlogSystem.Domain.Exceptions;
 using BlogSystem.Domain.Posts;
 using BlogSystem.Domain.Tags;
-using Mediator;
+using MediatR;
 
 namespace BlogSystem.Application.Posts.UpdatePost;
 
 internal sealed class UpdatePostHandler(
     IPostRepository postRepository,
     IUnitOfWork unitOfWork,
-    ITagRepository tagRepository) : ICommandHandler<UpdatePostCommand>
+    ITagRepository tagRepository) : IRequestHandler<UpdatePostCommand>
 {
-    public async ValueTask<Unit> Handle(UpdatePostCommand command, CancellationToken cancellationToken)
-    {
-        await PrivateHandle(command, cancellationToken);
-        return Unit.Value;
-    }
-    private async Task PrivateHandle(UpdatePostCommand command, CancellationToken cancellationToken)
+    public async Task Handle(UpdatePostCommand command, CancellationToken cancellationToken)
     {
         var existingPost = await postRepository.GetByIdAsync(command.Id, cancellationToken);
 
