@@ -1,0 +1,45 @@
+﻿version: '3.9'
+
+services:
+  blogsystem-api:
+    container_name: blogsystem-api
+    image: blogsystem-api:latest
+    build:
+      context: .
+      dockerfile: src/BlogSystem.API/Dockerfile
+    ports:
+      - "5193:80"
+      - "7168:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80;https://+:443
+      - ASPNETCORE_HTTPS_PORT=7168
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password123
+      - ConnectionStrings__BlogConnection=Server=db,1433;Database=Blog;User Id=SA;Password=SqLP@ass;TrustServerCertificate=True;MultipleActiveResultSets=true;
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/https:ro
+    depends_on:
+      - db
+    restart: "no"  # Don't restart automatically
+    labels:
+      - "com.docker.compose.recreate=always"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+
+  db:
+    container_name: blog-db
+    image: mcr.microsoft.com/mssql/server:latest
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=SqLP@ass
+    volumes:
+      - sql_data:/var/opt/mssql
+
+volumes:
+  sql_data:
