@@ -26,5 +26,7 @@ public static class WebApplicationExtensions
         using BlogDbContext dbContext = scope.ServiceProvider.GetRequiredService<BlogDbContext>();
 
         dbContext.Database.Migrate();
+
+        return app;
     }
 }
