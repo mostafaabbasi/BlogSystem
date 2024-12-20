@@ -10,7 +10,7 @@ public sealed class CreatePostEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("/post", async (
+        app.MapPost("/posts", async (
             [FromBody] CreatePostRequest body,
             [FromServices] IMediator mediator,
             CancellationToken cancellationToken) =>

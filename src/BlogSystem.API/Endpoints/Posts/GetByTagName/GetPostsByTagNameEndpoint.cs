@@ -10,7 +10,7 @@ public sealed class GetPostsByTagNameEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/by-tag-name",
+        app.MapGet("/posts/by-tag-name",
         async (
         [AsParameters] GetPostsByTagNameRequest parameter,
         [FromServices] IMediator mediator,
