@@ -1,4 +1,4 @@
-using Mediator;
+using MediatR;
 
 namespace BlogSystem.Application.Posts.UpdatePost;
 
@@ -8,4 +8,4 @@ public sealed record UpdatePostCommand(
     string Content, 
     string Summary, 
     string Author,
-    List<string> TagNames) : ICommand;
+    List<string> TagNames) : IRequest;

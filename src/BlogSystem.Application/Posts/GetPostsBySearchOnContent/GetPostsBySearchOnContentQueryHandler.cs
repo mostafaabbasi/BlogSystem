@@ -1,36 +1,30 @@
 using BlogSystem.Application.Data;
 using Dapper;
-using Mediator;
+using MediatR;
 
 namespace BlogSystem.Application.Posts.GetPostsBySearchOnContent;
 
-public class GetPostsBySearchOnContentQueryHandler(ISqlConnectionFactory sqlConnectionFactory) : IQueryHandler<GetPostsBySearchOnContentQuery, IEnumerable<GetPostsBySearchOnContentResponse>>
+public class GetPostsBySearchOnContentQueryHandler(ISqlConnectionFactory sqlConnectionFactory) : IRequestHandler<GetPostsBySearchOnContentQuery, IEnumerable<GetPostsBySearchOnContentResponse>>
 {
-    public async ValueTask<IEnumerable<GetPostsBySearchOnContentResponse>> Handle(GetPostsBySearchOnContentQuery query, CancellationToken cancellationToken)
-    {
-        return await PrivateHandle(query, cancellationToken);
-    }
-
-
-    private async Task<IEnumerable<GetPostsBySearchOnContentResponse>> PrivateHandle(GetPostsBySearchOnContentQuery query, CancellationToken cancellationToken)
+    public async Task<IEnumerable<GetPostsBySearchOnContentResponse>> Handle(GetPostsBySearchOnContentQuery query, CancellationToken cancellationToken)
     {
         using var connection = await sqlConnectionFactory.CreateConnectionAsync(cancellationToken);
 
         const string sql = """
-        SELECT 
-            p.Id,
-            p.Title,
-            p.Summary,
-            p.Content,
-            p.Author,
-            p.CreatedAt,
-            t.Name as TagName
-        FROM Posts p
-        LEFT JOIN PostTags pt ON p.Id = pt.PostId
-        LEFT JOIN Tags t ON pt.TagId = t.Id
-        WHERE p.Content LIKE @SearchPattern
-        ORDER BY p.CreatedAt DESC
-        """;
+                           SELECT 
+                               p.Id,
+                               p.Title,
+                               p.Summary,
+                               p.Content,
+                               p.Author,
+                               p.CreatedAt,
+                               t.Name as TagName
+                           FROM Posts p
+                           LEFT JOIN PostTags pt ON p.Id = pt.PostId
+                           LEFT JOIN Tags t ON pt.TagId = t.Id
+                           WHERE p.Content LIKE @SearchPattern
+                           ORDER BY p.CreatedAt DESC
+                           """;
 
         var postDictionary = new Dictionary<Guid, GetPostsBySearchOnContentResponse>();
 

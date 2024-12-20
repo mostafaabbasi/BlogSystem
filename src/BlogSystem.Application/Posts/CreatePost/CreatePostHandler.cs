@@ -1,16 +1,16 @@
 using BlogSystem.Domain.Abstractions;
 using BlogSystem.Domain.Posts;
 using BlogSystem.Domain.Tags;
-using Mediator;
+using MediatR;
 
 namespace BlogSystem.Application.Posts.CreatePost;
 
 internal sealed class CreatePostHandler(
     IPostRepository postRepository,
     IUnitOfWork unitOfWork,
-    ITagRepository tagRepository) : ICommandHandler<CreatePostCommand, Guid>
+    ITagRepository tagRepository) : IRequestHandler<CreatePostCommand, Guid>
 {
-    public async ValueTask<Guid> Handle(CreatePostCommand command, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreatePostCommand command, CancellationToken cancellationToken)
     {
         var tags = await tagRepository.SetTagsAsync(command.TagNames, cancellationToken);
         var tagIds = tags.Select(s=>s.Id).ToList();

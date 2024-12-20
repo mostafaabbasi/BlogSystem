@@ -6,10 +6,9 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddMediator(act=>
+        services.AddMediatR(act =>
         {
-            act.Namespace = "BlogSystem.Mediator";
-            act.ServiceLifetime = ServiceLifetime.Scoped;
+            act.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
         });
 
         return services;
