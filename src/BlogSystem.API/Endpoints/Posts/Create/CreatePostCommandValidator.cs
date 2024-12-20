@@ -1,10 +1,10 @@
 using FluentValidation;
 
-namespace BlogSystem.Application.Posts.CreatePost;
+namespace BlogSystem.API.Endpoints.Posts.Create;
 
-internal sealed class CreatePostCommandValidator : AbstractValidator<CreatePostCommand>
+internal sealed class CreatePostRequestValidator : AbstractValidator<CreatePostRequest>
 {
-    public CreatePostCommandValidator()
+    public CreatePostRequestValidator()
     {
         RuleFor(f => f.Title)
         .NotEmpty()
