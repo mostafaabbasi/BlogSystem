@@ -10,7 +10,7 @@ public sealed class GetPostsBySearchOnContentEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/search-on-content", async (
+        app.MapGet("/posts/search-on-content", async (
             [AsParameters] GetPostsBySearchOnContentRequest parameter,
             [FromServices] IMediator mediator,
             CancellationToken cancellationToken) =>

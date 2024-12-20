@@ -10,7 +10,7 @@ public sealed class UpdatePostEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPut("/post/{id}", async (
+        app.MapPut("/posts/{id}", async (
             [FromRoute] string id,
             [FromBody] UpdatePostRequest body,
             [FromServices] IMediator mediator,
