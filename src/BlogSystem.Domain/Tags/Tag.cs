@@ -1,5 +1,4 @@
 using BlogSystem.Domain.Abstractions;
-using BlogSystem.Domain.Posts;
 
 namespace BlogSystem.Domain.Tags;
 
