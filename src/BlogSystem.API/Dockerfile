@@ -14,9 +14,18 @@ COPY ["src/BlogSystem.Application/BlogSystem.Application.csproj", "src/BlogSyste
 RUN dotnet restore "src/BlogSystem.API/BlogSystem.API.csproj"
 
 COPY . .
+
+# Run tests
+FROM build AS test
+WORKDIR /src
+RUN dotnet test --no-restore
+
+# Publish
+FROM build AS publish
+WORKDIR /src
 RUN dotnet publish "src/BlogSystem.API/BlogSystem.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false --no-restore
 
 FROM base AS final
 WORKDIR /app
-COPY --from=build /app/publish .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "BlogSystem.API.dll"]
