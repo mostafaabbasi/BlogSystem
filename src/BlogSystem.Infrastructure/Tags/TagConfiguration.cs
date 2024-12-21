@@ -12,6 +12,12 @@ internal sealed class TagConfiguration : IEntityTypeConfiguration<Tag>
         builder.ToTable("Tags");
 
         builder.HasKey(t => t.Id);
+        
+        builder.Property(d => d.Id)
+            .ValueGeneratedNever()
+            .HasConversion(
+                id => id.Value,
+                value => value);
 
         builder.OwnsOne(x => x.Name, nameBuilder =>
         {
@@ -22,9 +28,5 @@ internal sealed class TagConfiguration : IEntityTypeConfiguration<Tag>
 
             nameBuilder.HasIndex(h => h.Value).IsUnique();
         });
-
-        builder.HasMany<PostTag>()
-        .WithOne()
-        .HasForeignKey(x => x.TagId);
     }
 }

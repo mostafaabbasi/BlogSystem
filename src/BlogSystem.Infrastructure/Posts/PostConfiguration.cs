@@ -11,6 +11,12 @@ internal sealed class PostConfiguration : IEntityTypeConfiguration<Post>
         builder.ToTable("Posts");
 
         builder.HasKey(x => x.Id);
+        
+        builder.Property(d => d.Id)
+            .ValueGeneratedNever()
+            .HasConversion(
+                id => id.Value,
+                value => value);
 
         builder.OwnsOne(x => x.Title, nameBuilder =>
         {
@@ -43,9 +49,22 @@ internal sealed class PostConfiguration : IEntityTypeConfiguration<Post>
                       .HasMaxLength(100)
                       .IsRequired();
         });
+        
+        builder.OwnsMany(so => so.TagIds, tagBuilder =>
+        {
+            tagBuilder
+                .ToTable("PostTags");
 
-        builder.HasMany(h=>h.PostTags)
-        .WithOne(w=>w.Post)
-        .HasForeignKey(w=>w.PostId);
+            tagBuilder.Property(x => x.Value)
+                .HasColumnName("TagId")
+                .ValueGeneratedNever()
+                .IsRequired();
+
+            tagBuilder
+                .WithOwner()
+                .HasForeignKey("PostId");
+
+            tagBuilder.HasKey("Id");
+        });
     }
 }

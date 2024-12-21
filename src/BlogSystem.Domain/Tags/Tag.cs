@@ -2,7 +2,7 @@ using BlogSystem.Domain.Abstractions;
 
 namespace BlogSystem.Domain.Tags;
 
-public sealed class Tag : Entity
+public sealed class Tag : Entity<TagId>
 {
 #pragma warning disable CS8618
     private Tag()
@@ -21,6 +21,5 @@ public sealed class Tag : Entity
         return new Tag(Guid.NewGuid(), name);
     }
     
-    public Guid Id { get; private set; }
     public Name Name { get; private set; }    
 }

@@ -1,6 +1,8 @@
+using BlogSystem.Domain.Abstractions;
+
 namespace BlogSystem.Domain.Posts;
 
-public sealed record Title
+public sealed record Title : ValueObject<Title>
 {
     public Title(string value)
     {
@@ -13,4 +15,8 @@ public sealed record Title
     public string Value { get; }
 
     public static implicit operator Title(string value) => new Title(value);
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value;
+    }
 }

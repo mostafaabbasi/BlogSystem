@@ -1,6 +1,8 @@
+using BlogSystem.Domain.Abstractions;
+
 namespace BlogSystem.Domain.Posts;
 
-public sealed record Author
+public sealed record Author : ValueObject<Author>
 {
     public Author(string value)
     {
@@ -13,4 +15,8 @@ public sealed record Author
     public string Value { get; }
 
     public static implicit operator Author(string value) => new Author(value);
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value;
+    }
 }
