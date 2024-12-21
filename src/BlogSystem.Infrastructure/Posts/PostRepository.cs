@@ -14,6 +14,6 @@ internal sealed class PostRepository(BlogDbContext dbContext) : IPostRepository
 
     public async Task<Post?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _entities.Include(i => i.PostTags).FirstOrDefaultAsync(f => f.Id == id, cancellationToken);
+        return await _entities.FindAsync(id, cancellationToken);
     }
 }

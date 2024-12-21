@@ -26,6 +26,6 @@ internal sealed class CreatePostHandler(
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return post.Id;
+        return post.Id.Value;
     }
 }

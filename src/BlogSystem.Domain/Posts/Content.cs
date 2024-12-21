@@ -1,6 +1,8 @@
+using BlogSystem.Domain.Abstractions;
+
 namespace BlogSystem.Domain.Posts;
 
-public sealed record Content
+public sealed record Content : ValueObject<Content>
 {
     public Content(string value)
     {
@@ -13,4 +15,8 @@ public sealed record Content
     public string Value { get; }
 
     public static implicit operator Content(string value) => new Content(value);
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value;
+    }
 }

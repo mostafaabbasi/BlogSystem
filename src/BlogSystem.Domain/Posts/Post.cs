@@ -1,8 +1,9 @@
 using BlogSystem.Domain.Abstractions;
+using BlogSystem.Domain.Tags;
 
 namespace BlogSystem.Domain.Posts;
 
-public sealed partial class Post : Entity
+public sealed partial class Post : Entity<PostId>
 {
     private Post() { }
 
@@ -15,12 +16,12 @@ public sealed partial class Post : Entity
         CreatedAt = DateTime.UtcNow;
     }
 
-    private readonly List<PostTag> _postTags = new();
+    private readonly List<TagId> _tagIds = new();
 
     public Title Title { get; private set; }
     public Content Content { get; private set; }
     public Summary Summary { get; private set; }
     public Author Author { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    public IReadOnlyCollection<PostTag> PostTags => _postTags.AsReadOnly();
+    public IReadOnlyCollection<TagId> TagIds => _tagIds.AsReadOnly();
 }

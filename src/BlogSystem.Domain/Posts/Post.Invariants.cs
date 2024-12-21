@@ -1,3 +1,5 @@
+using BlogSystem.Domain.Tags;
+
 namespace BlogSystem.Domain.Posts;
 
 public sealed partial class Post
@@ -9,7 +11,7 @@ public sealed partial class Post
         string content,
         string summary,
         string author,
-        List<Guid> tagIds)
+        List<TagId> tagIds)
     {
         var post = new Post(Guid.NewGuid(),
         new Title(title),
@@ -27,29 +29,24 @@ public sealed partial class Post
         string content,
         string summary,
         string author,
-        List<Guid> tagIds)
+        List<TagId> tagIds)
     {
         Title = title;
         Content = content;
         Summary = summary;
         Author = author;
-        _postTags.Clear();
+        _tagIds.Clear();
         AddTags(tagIds);
     }
 
-    private void AddTags(List<Guid> tagIds)
+    private void AddTags(List<TagId> tagIds)
     {
-        if (_postTags.Count >= MaxTags)
+        if (_tagIds.Count >= MaxTags)
             throw new InvalidOperationException($"A post cannot have more than {MaxTags} tags.");
 
         foreach (var tagId in tagIds)
         {
-            var postTag = new PostTag()
-            {
-                PostId = Id,
-                TagId = tagId
-            };
-            _postTags.Add(postTag);
+            _tagIds.Add(tagId);
         }
     }
 }
