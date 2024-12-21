@@ -19,8 +19,10 @@ jobs:
           dotnet-version: 9.0.x
       - name: Restore dependencies
         run: dotnet restore --no-cache
+      - name: Run test
+        run: dotnet test --no-restore
       - name: Build
-        run: dotnet build --configuration Release
+        run: dotnet build --no-restore --configuration Release
 
   docker:
     name: Docker Image CI

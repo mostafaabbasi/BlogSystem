@@ -5,7 +5,7 @@ namespace BlogSystem.Domain.Posts;
 public sealed partial class Post
 {
     private const int MaxTags = 10;
-    
+
     public static Post Create(
         string title,
         string content,
@@ -14,10 +14,10 @@ public sealed partial class Post
         List<TagId> tagIds)
     {
         var post = new Post(Guid.NewGuid(),
-        new Title(title),
-        new Content(content),
-        new Summary(summary),
-        new Author(author));
+            new Title(title),
+            new Content(content),
+            new Summary(summary),
+            new Author(author));
 
         post.AddTags(tagIds);
 
@@ -41,11 +41,11 @@ public sealed partial class Post
 
     private void AddTags(List<TagId> tagIds)
     {
-        if (_tagIds.Count >= MaxTags)
-            throw new InvalidOperationException($"A post cannot have more than {MaxTags} tags.");
-
         foreach (var tagId in tagIds)
         {
+            if (_tagIds.Count >= MaxTags)
+                throw new InvalidOperationException($"A post cannot have more than {MaxTags} tags.");
+            
             _tagIds.Add(tagId);
         }
     }
