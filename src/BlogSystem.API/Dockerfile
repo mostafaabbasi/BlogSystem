@@ -15,9 +15,6 @@ RUN dotnet restore "src/BlogSystem.API/BlogSystem.API.csproj"
 
 COPY . .
 
-# Run tests
-FROM build AS test
-WORKDIR /src
 RUN dotnet test --no-restore
 
 # Publish
