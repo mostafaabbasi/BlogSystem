@@ -12,8 +12,8 @@ COPY ["src/BlogSystem.Infrastructure/BlogSystem.Infrastructure.csproj", "src/Blo
 COPY ["src/BlogSystem.Domain/BlogSystem.Domain.csproj", "src/BlogSystem.Domain/"]
 COPY ["src/BlogSystem.Application/BlogSystem.Application.csproj", "src/BlogSystem.Application/"]
 COPY ["test/BlogSystem.Domain.UnitTests/BlogSystem.Domain.UnitTests.csproj", "test/BlogSystem.Domain.UnitTests/"]
-RUN dotnet restore "src/BlogSystem.API/BlogSystem.API.csproj"
-RUN dotnet restore "test/BlogSystem.Domain.UnitTests/BlogSystem.Domain.UnitTests.csproj"
+RUN dotnet restore "src/BlogSystem.API/BlogSystem.API.csproj" --no-cache
+RUN dotnet restore "test/BlogSystem.Domain.UnitTests/BlogSystem.Domain.UnitTests.csproj" --no-cache
 
 COPY . .
 
