@@ -106,3 +106,7 @@ The `BlogSystem` is a web API developed using **.NET 9** and follows industry-st
 ## Conclusion
 
 The decisions outlined in this document ensure that the `BlogSystem` is built using best practices for maintainability, scalability, and flexibility. By using **Dapper** for queries, **EF** for commands, **SQL** as the database, **Docker Compose** for containerization, and **GitHub Actions** for CI/CD, we optimize performance, streamline development and deployment, and ensure consistency across environments. The architecture facilitates modular development, ease of testing, and provides clear separation between concerns. With unit tests and other quality practices in place, the project is positioned for long-term success.
+
+
+## Explanation:
+- **https://drive.google.com/file/d/1yW477waKhXCHkZ_4b1J8hjoplzJR1ZVF/view?usp=sharing**
